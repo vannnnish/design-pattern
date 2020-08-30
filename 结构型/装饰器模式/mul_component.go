@@ -6,11 +6,11 @@ type AddComponent struct {
 	num int
 }
 
-func WarpMulComponent(c Component,num int)Component{
+func WarpAddComponent(c Component,num int)Component{
 	return &AddComponent{c,num}
 }
 
 
 func (mul *AddComponent)Calc()int{
-	return mul.Component.Calc()*mul.num
+	return mul.Component.Calc()+mul.num
 }

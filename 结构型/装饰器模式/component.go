@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Component interface {
 	Calc() int
 }
@@ -12,5 +14,5 @@ func (*ConcreateComponent) Calc() int {
 }
 
 func main() {
-	WarpMulComponent(&ConcreateComponent{}, 2).Calc()
+	fmt.Println(WarpAddComponent(&ConcreateComponent{}, 2).Calc())
 }
