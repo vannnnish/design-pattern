@@ -3,27 +3,20 @@ package main
 import "fmt"
 
 type FtpDownloader struct {
-	tmp *template
+	*template
 }
 
 func NewFtpDownload() Downloader {
-	downloader := &HttpDownloader{}
-	return &FtpDownloader{
-		tmp: NewTemplate(downloader),
-	}
+	downloader := &FtpDownloader{}
+	template := NewTemplate(downloader)
+	downloader.template = template
+	return downloader
 }
 
 func (hd *FtpDownloader) download() {
-	fmt.Printf("ftp down %s", hd.tmp.url)
+	fmt.Printf("ftp down %s", hd.url)
 }
 
 func (hd *FtpDownloader) save() {
-	fmt.Printf("ftp save %s\n", hd.tmp.url)
+	fmt.Printf("ftp save %s\n", hd.url)
 }
-
-func (hd *FtpDownloader) Download(url string) {
-	hd.tmp.url = url
-	hd.download()
-	hd.save()
-}
-
