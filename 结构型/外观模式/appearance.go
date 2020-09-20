@@ -20,7 +20,3 @@ func (api *APICall) Test() string {
 }
 
 
-func main(){
-	api:=NewTAPI()
-	fmt.Println(api.Test())
-}
