@@ -1,7 +1,4 @@
-package main
-
-// 操作的抽象
-type SubOperatorFactory struct{}
+package imp
 
 // 操作类中包含操作数
 type SubOperator struct {
@@ -13,7 +10,8 @@ func (o SubOperator) Result() int {
 	return o.right - o.left
 }
 
-//
-func (SubOperatorFactory) Create() Operator {
-	return &SubOperator{&OperatorBase{}}
+func NewSubFactory() *SubOperator {
+	return &SubOperator{
+		OperatorBase: &OperatorBase{},
+	}
 }

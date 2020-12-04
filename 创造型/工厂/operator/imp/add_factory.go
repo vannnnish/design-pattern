@@ -1,9 +1,4 @@
-package main
-
-
-
-// 操作的抽象
-type PlusOperatorFactory struct{}
+package imp
 
 // 操作类中包含操作数
 type PlusOperator struct {
@@ -15,6 +10,8 @@ func (o PlusOperator) Result() int {
 	return o.right + o.left
 }
 
-func (PlusOperatorFactory) Create() Operator {
-	return &PlusOperator{&OperatorBase{}}
+func NewAddFactory() *PlusOperator {
+	return &PlusOperator{
+		OperatorBase: &OperatorBase{},
+	}
 }

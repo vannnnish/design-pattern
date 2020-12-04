@@ -1,6 +1,10 @@
-package main
+package imp
 
 
+/*
+	这一层可要，可不要，
+	要的话，1可以省略SetLeft，SetRight这一些重复代码的编写，
+*/
 type OperatorBase struct {
 	left  int
 	right int
