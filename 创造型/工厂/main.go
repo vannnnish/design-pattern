@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"pattern/创造型/工厂/operator"
-	"pattern/创造型/工厂/operator/imp"
+	"pattern/创造型/工厂/operator/impl"
 )
 
 /*
@@ -15,9 +15,9 @@ import (
 func CreateOperatorFactory(operate string) operator.Operator {
 	switch operate {
 	case "add":
-		return imp.NewAddFactory()
+		return impl.NewAddFactory()
 	case "sub":
-		return imp.NewSubFactory()
+		return impl.NewSubFactory()
 	default:
 		return nil
 	}
