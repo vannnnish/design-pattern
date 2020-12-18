@@ -1,31 +1,22 @@
-package main
+package impl
 
-import "fmt"
-
-type Leaf struct {
-	component
-}
-
-func NewLeaf() *Leaf { // 开辟一个叶子
-	return &Leaf{}
-}
-
-func (c *Leaf) Print(pre string) {
-	fmt.Println(pre, c.Name())
-}
+import (
+	"fmt"
+	component2 "pattern/结构型/组合模式/component"
+)
 
 type Composite struct {
 	component
-	childs []Component
+	childs []component2.Component
 }
 
 func NewComposite() *Composite {
 	return &Composite{
-		childs: make([]Component, 0),
+		childs: make([]component2.Component, 0),
 	}
 }
 
-func (c *Composite) AddChild(child Component) {
+func (c *Composite) AddChild(child component2.Component) {
 	child.SetParent(c)
 	c.childs = append(c.childs, child) // 加入孩子节点
 }
