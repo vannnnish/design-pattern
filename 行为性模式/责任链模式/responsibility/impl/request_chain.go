@@ -1,7 +1,9 @@
-package main
+package impl
+
+import "pattern/行为性模式/责任链模式/responsibility"
 
 type RequestChain struct {
-	Manager
+	responsibility.Manager
 	successor *RequestChain // 处理成功
 }
 

@@ -1,4 +1,4 @@
-package main
+package responsibility
 
 type Manager interface {
 	HaveRight(money int) bool                     // 判断权限

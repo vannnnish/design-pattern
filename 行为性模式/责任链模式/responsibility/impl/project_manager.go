@@ -1,6 +1,8 @@
-package main
+package impl
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type ProjectManger struct {
 }
