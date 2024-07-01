@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"bytes"
+	"encoding/gob"
+	"fmt"
+)
 
 type Cloneable interface {
 	Clone() Cloneable
@@ -24,13 +28,19 @@ func (p *PrototypeManger) Set(name string, prototype Cloneable) {
 }
 
 type Type1 struct {
-	name string
+	Name string
+	Arr  []int
 }
 
-// 深复制
-func (t *Type1) Clone() Cloneable {
-	tc := *t // 开辟内存 新建变量，存储指针指向的内容
-	return &tc
+func (t *Type1) Clone() *Type1 {
+	//tc := *t // 开辟内存 新建变量，存储指针指向的内容
+	t1 := new(Type1)
+	err := deepCopy(t1, t)
+	if err != nil {
+		fmt.Println("copy err :", err)
+		return nil
+	}
+	return t1
 }
 
 type Type2 struct {
@@ -44,8 +54,12 @@ func (t *Type2) Clone() Cloneable {
 func main() {
 	mgr := NewPrototypeManager()
 	t1 := &Type1{
-		"type1"}
-	mgr.Set("t1", t1)
+		"type1", []int{1, 2}}
+	t1Copy := t1.Clone()
+	fmt.Println("t1Copy == t1? ", t1Copy == t1)
+	fmt.Println("arr:", t1)
+	fmt.Println("arr copy:", t1Copy)
+	//fmt.Println("t1Copy == t1? ", &(t1Copy.arr) == &(t1.arr))
 	t11 := mgr.Get("t1")
 	t22 := t11.Clone()
 	if t11 == t22 {
@@ -65,4 +79,13 @@ func main() {
 	} else {
 		fmt.Println("深复制")
 	}
+}
+
+// 深拷贝
+func deepCopy[T *Type1 | *Type2](dst, src T) error {
+	var buf bytes.Buffer
+	if err := gob.NewEncoder(&buf).Encode(src); err != nil {
+		return err
+	}
+	return gob.NewDecoder(bytes.NewReader(buf.Bytes())).Decode(dst)
 }
